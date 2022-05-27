@@ -2,10 +2,14 @@ package test.pages;
 
 import common.DriverFactory;
 import common.ElementHelper;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+
+import java.util.List;
 
 public class LoginPage {
 
@@ -29,14 +33,30 @@ public class LoginPage {
         webDriver.findElement(By.cssSelector(str)).click();
     }
 
-    public void checkElement(String str){
-        WebElement element = webDriver.findElement(By.xpath("//*[text()='" + str + "']"));
+    public void checkElement(String str, boolean actualFlag){
+        By by = By.xpath("//*[text()='" + str + "']");
 
-        boolean flag = false;
-        if( element != null )
-            flag = true;
+        if( actualFlag )
+        {
+            elementHelper.checkElementPresence(by);
+            WebElement element = webDriver.findElement(by);
 
-        Assert.assertEquals(true, flag);
+            boolean flag = false;
+            if( element != null )
+                flag = true;
+
+            Assert.assertEquals(actualFlag, flag);
+        }
+        else
+        {
+            List<WebElement> list = webDriver.findElements(by);
+
+            boolean flag = false;
+            if(list.size() > 0)
+                flag = true;
+
+            Assert.assertEquals(actualFlag, flag);
+        }
     }
 
     public void checkTextBoxPlaceHolder(String name, String attribute)
@@ -46,7 +66,7 @@ public class LoginPage {
         Assert.assertEquals(attribute, variable);
     }
 
-    public void checkNameElement(String name)
+    public boolean checkNameElement(String name)
     {
         WebElement element = webDriver.findElement(By.name(name));
 
@@ -55,6 +75,20 @@ public class LoginPage {
             flag = true;
 
         Assert.assertEquals(true, flag);
+        return flag;
     }
+
+    public void writeText(String elementName, String text)
+    {
+        boolean flag = checkNameElement(elementName);
+        Assert.assertEquals(true, flag);
+
+        By emailBy = By.name(elementName);
+        elementHelper.checkElementPresence(emailBy);
+
+        WebElement element = webDriver.findElement(emailBy);
+        element.sendKeys(text);
+    }
+
 
 }

@@ -15,6 +15,8 @@ import test.pages.HomePage;
 public class CheckLoginPage {
 
     HomePage homepage = new HomePage();
+
+    @Given("Enes is on Home page")
     public void enes_is_on_home_page() {
         homepage.goToHome();
     }

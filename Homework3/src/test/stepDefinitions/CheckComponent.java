@@ -19,11 +19,11 @@ public class CheckComponent {
     }
     @Then("should see {string} title")
     public void should_see_title(String string) {
-        loginPage.checkElement(string);
+        loginPage.checkElement(string, true);
     }
     @Then("should see {string} radio button")
     public void should_see_radio_button(String string) {
-        loginPage.checkElement(string);
+        loginPage.checkElement(string, true);
     }
     @Then("should see {string} text on Email")
     public void should_see_text_on_email(String string) {
@@ -35,19 +35,19 @@ public class CheckComponent {
     }
     @Then("should see Show Password Icon")
     public void should_see_show_password_icon() {
-        loginPage.checkElement("Göster");
+        loginPage.checkElement("Göster", true);
     }
     @Then("should see {string} remember me")
     public void should_see_remember_me(String string) {
-        loginPage.checkElement(string);
+        loginPage.checkElement(string, true);
     }
     @Then("should see {string} forgot password")
     public void should_see_forgot_password(String string) {
-        loginPage.checkElement(string);
+        loginPage.checkElement(string, true);
     }
     @Then("should see {string} login button")
     public void should_see_login_button(String string) {
-        loginPage.checkElement(string);
+        loginPage.checkElement(string, true);
     }
 
     @Then("should see Phone Text Box")
